@@ -31,5 +31,5 @@ app.get('/api/:date', function(req, res) {
   } else {
     date = new Date(Number.parseInt(text))
   }
-  res.json({ unix: date.getTime(), utc: date.toString() })
+  res.json({ unix: date.getTime(), utc: date.toGMTString() })
 })
