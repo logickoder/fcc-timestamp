@@ -33,5 +33,11 @@ app.get('/api/:date?', function(req, res) {
       date = new Date(Number.parseInt(text))
     }
   }
-  res.json({ unix: date.getTime(), utc: date.toGMTString() })
+
+  let unix = date.getTime()
+  if (isNaN(unix)) {
+    res.json({ error: "Invalid Date" })
+  } else {
+    res.json({ unix: date.getTime(), utc: date.toGMTString() })
+  }
 })
