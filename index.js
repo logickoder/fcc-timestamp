@@ -23,13 +23,15 @@ var listener = app.listen(process.env.PORT, function() {
   console.log('Your app is listening on port ' + listener.address().port);
 });
 
-app.get('/api/:date', function(req, res) {
+app.get('/api/:date?', function(req, res) {
   let text = req.params.date
-  let date
-  if (isNaN(text)) {
-    date = new Date(text)
-  } else {
-    date = new Date(Number.parseInt(text))
+  let date = new Date()
+  if (text != null) {
+    if (isNaN(text)) {
+      date = new Date(text)
+    } else {
+      date = new Date(Number.parseInt(text))
+    }
   }
   res.json({ unix: date.getTime(), utc: date.toGMTString() })
 })
